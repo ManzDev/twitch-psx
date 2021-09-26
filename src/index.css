@@ -1,0 +1,665 @@
+@font-face {
+  font-family: "BioRhyme";
+  src: url("/fonts/biorhyme.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plation";
+  src:
+    url("/fonts/plation.woff2") format("woff2"),
+    url("/fonts/plation.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Zrnic Rg";
+  src:
+    url("/fonts/zrnic.woff2") format("woff2"),
+    url("/fonts/zrnic.woff") format("woff");
+  font-display: swap;
+}
+
+:root {
+  --psx-border: 8px solid #b3b3b3;
+  --psx-bgcolor: #e7e7e7;
+  --psx-width: 540px;
+  --psx-height: 360px;
+  --psx-controller-width: 260px;
+  --psx-controller-height: 190px;
+}
+
+body {
+  background: #44a;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 10em;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5em;
+  }
+}
+
+.play-station-container {
+  position: relative;
+  font-family: Montserrat;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 10px;
+    height: 100%;
+    background: #b3b3b3;
+    clip-path: polygon(var(--triangle-shape));
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -8px;
+    width: 10px;
+    height: 100%;
+    background: #b3b3b3;
+    transform: scaleX(-1);
+    clip-path: polygon(var(--triangle-shape));
+  }
+
+  & .play-station-console-container {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr 0.85fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    width: var(--psx-width);
+    height: var(--psx-height);
+
+    & .play-station-side {
+      border: var(--psx-border);
+      background: var(--psx-bgcolor);
+      border-radius: 5px;
+      height: 100%;
+
+      & .button {
+        border: 8px solid #b3b3b3;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px #000 inset;
+        background: radial-gradient(at 80% 80%, #949597, #b4b4b4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.reset {
+          font-size: 7px;
+          transform: translate(-20px, -15px);
+        }
+
+        &.power {
+          color: #aec1bd;
+          transform: translate(0, -14px);
+        }
+
+        &.eject {
+          color: #c0d2e6;
+          transform: translate(0, -14px);
+        }
+
+        &.small {
+          width: 35px;
+          height: 35px;
+          border: 6px solid #b3b3b3;
+        }
+      }
+
+      & .gap {
+        width: 7px;
+        height: 20px;
+        background: #a8a8a8;
+        display: flex;
+        align-items: flex-end;
+        position: absolute;
+      }
+
+      & .led {
+        &.on {
+          width: 100%;
+          height: 70%;
+          background: #d9fe70;
+          box-shadow:
+            0 1px 2px #93ae61 inset,
+            0 -2px 0 #414d3f inset;
+        }
+      }
+
+      &.left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      &.right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+
+    & .play-station-center {
+      border: var(--psx-border);
+      border-left: 0;
+      border-right: 0;
+      background: var(--psx-bgcolor);
+      height: 90%;
+      position: relative;
+
+      & .play-station-cd-cover {
+        width: 300px;
+        height: 300px;
+        background: var(--psx-bgcolor);
+        border-radius: 50%;
+        border: var(--psx-border);
+        position: absolute;
+        transform: translate(-15%, 0);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        & .brand {
+          font-family: "BioRhyme";
+          font-size: 20px;
+          letter-spacing: -1px;
+          color: #676c72;
+        }
+
+        & .logo-container {
+          font-family: "Zrnic Rg";
+          font-weight: 600;
+          font-size: 16px;
+          color: #676c72;
+          width: 100px;
+          height: 75px;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          & .logo {
+            font-family: "Plation";
+            font-size: 50px;
+            display: flex;
+            transform: translate(10px, 0) scale(0.7);
+
+            & .p {
+              color: red;
+              transform: skewY(20deg) translateZ(40px) translateX(-4px) translateY(-7px);
+              position: relative;
+              font-size: 60px;
+              perspective: 2000px;
+              z-index: 10;
+            }
+
+            & .s {
+              position: absolute;
+              z-index: 5;
+              width: 58px;
+              font-size: 70px;
+              perspective: 1000px;
+              background: linear-gradient(to right, #f3c202 33%, #00aa9e 33% 66%, #326db3 66%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              transform: skewX(381deg) skewY(355deg) rotateX(65deg) rotateY(12deg) rotateZ(308deg) translateX(0) translateY(-26px) translateZ(-2px) scaleX(1.5) scaleY(1);
+            }
+          }
+
+          & .text {
+            transform: translateY(-20px);
+          }
+        }
+
+        & .face {
+          width: 150px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-direction: column;
+
+          & .eyes {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+
+            & .eye {
+              width: 15px;
+              height: 15px;
+              background: black;
+              border-radius: 50%;
+              position: relative;
+
+              &::before {
+                width: 5px;
+                height: 5px;
+                background: #fff;
+                border-radius: 50%;
+                content: "";
+                display: block;
+                position: absolute;
+                top: 2px;
+                right: 2px;
+              }
+            }
+          }
+
+          & .mouth {
+            background: #000;
+            width: 70px;
+            height: 30px;
+            border-radius: 10% 10% 50% 50% / 11% 11% 90% 90%;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+
+            & .tongue {
+              width: 40px;
+              height: 20px;
+              border-radius: 50%;
+              background: #ec1f79;
+              position: absolute;
+              bottom: 0;
+              transform: translateY(10px);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  & .play-station-shadow {
+    background: linear-gradient(to right, #0007, #0000);
+    width: 25%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: -1;
+    display: none;
+  }
+}
+
+.play-station-controller-container {
+  width: var(--psx-controller-width);
+  height: var(--psx-controller-height);
+  display: flex;
+  justify-content: center;
+  transform: translateY(60px);
+  z-index: 10;
+
+  & .play-station-controller-inner-container {
+    display: flex;
+    align-items: center;
+    width: calc(0.8 * var(--psx-controller-width));
+    height: calc(0.6 * var(--psx-controller-height));
+
+    & .play-station-controller {
+      display: grid;
+      grid-template-columns: 0.7fr 1.4fr 0.7fr;
+      width: 100%;
+      height: 60%;
+      background: var(--psx-bgcolor);
+      border: var(--psx-border);
+      position: relative;
+
+      & .face {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: absolute;
+        margin-top: 5px;
+
+        & .eyes {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+
+          & .eye {
+            width: 15px;
+            height: 15px;
+            background: black;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 10px;
+
+            &::before {
+              width: 5px;
+              height: 5px;
+              background: #fff;
+              border-radius: 50%;
+              content: "";
+              display: block;
+              position: absolute;
+              top: 2px;
+              right: 2px;
+            }
+          }
+        }
+
+        & .mouth {
+          border-bottom: 5px solid #000;
+          border-left: 5px solid #000;
+          border-right: 5px solid #000;
+          width: 50px;
+          height: 25px;
+          border-radius: 10% 10% 50% 50% / 11% 11% 90% 90%;
+          position: relative;
+          display: flex;
+          justify-content: center;
+        }
+      }
+
+      & .controller-core-left,
+      & .controller-core-right {
+        border: var(--psx-border);
+        width: 80px;
+        height: 80px;
+        background: var(--psx-bgcolor);
+        border-radius: 50%;
+        position: absolute;
+        top: -20px;
+        z-index: 5;
+      }
+
+      & .controller-core-left {
+        left: -40px;
+
+        & .cross-container {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          & .cross {
+            position: relative;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            grid-template-columns: repeat(3, 20px);
+            grid-template-rows: repeat(3, 20px);
+
+            &::before {
+              content: "";
+              display: block;
+              background: #d9d9d9;
+              width: 65px;
+              height: 22px;
+              position: absolute;
+              z-index: -1;
+              left: -4px;
+            }
+
+            &::after {
+              content: "";
+              display: block;
+              background: #d9d9d9;
+              width: 22px;
+              height: 65px;
+              position: absolute;
+              left: 31%;
+              z-index: -1;
+            }
+
+            & .button {
+              background: #656569;
+              width: 16px;
+              height: 16px;
+
+              &::after {
+                content: "";
+                display: block;
+                background: #656569;
+                width: 16px;
+                height: 16px;
+                clip-path: polygon(0 0, 100% 0, 50% 50%);
+              }
+
+              &.top {
+                background: linear-gradient(to bottom, transparent 25%, #656569 25%);
+              }
+
+              &.left {
+                background: linear-gradient(to right, transparent 25%, #656569 25%);
+              }
+
+              &.right {
+                background: linear-gradient(to left, transparent 25%, #656569 25%);
+              }
+
+              &.bottom {
+                background: linear-gradient(to top, transparent 25%, #656569 25%);
+              }
+
+              &.top::after {
+                transform: translateY(16px);
+              }
+
+              &.left::after {
+                transform: translateX(16px) rotate(-90deg);
+              }
+
+              &.right::after {
+                transform: translateX(-16px) rotate(90deg);
+              }
+
+              &.bottom::after {
+                transform: translateY(-16px) rotate(180deg);
+              }
+            }
+          }
+        }
+      }
+
+      & .controller-core-right {
+        right: -40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & .buttons-group {
+          display: grid;
+          grid-template-columns: repeat(3, 20px);
+          grid-template-rows: repeat(3, 20px);
+
+          & .button {
+            color: var(--color);
+            background: #646669;
+            border-radius: 50%;
+            font-size: 16px;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 4px #0008;
+
+            &.triangle {
+              --color: #2cab73;
+            }
+
+            &.square {
+              --color: #dbafdb;
+            }
+
+            &.circle {
+              --color: #df6a75;
+            }
+
+            &.x {
+              --color: #29aee8;
+            }
+
+            &.small {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+
+      & .controller-back-buttons {
+        border: var(--psx-border);
+        border-width: 6px;
+        background: var(--psx-bgcolor);
+        width: 50px;
+        height: 40px;
+        position: absolute;
+        top: -35px;
+        z-index: -1;
+        border-radius: 40% 40% 0% 0% / 65% 65% 0% 0%;
+
+        &.left {
+          left: -20px;
+        }
+
+        &.right {
+          right: -20px;
+        }
+      }
+
+      & .controller-back-button {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        width: 35px;
+        height: 20px;
+        background: #656569;
+        border-radius: 40% 40% 0% 0%;
+        transform: translateY(-40px);
+        z-index: -2;
+
+        &.left {
+          left: -6px;
+        }
+
+        &.right {
+          right: -6px;
+        }
+      }
+
+      & .controller-handle {
+        width: 70px;
+        height: 125px;
+        position: absolute;
+        border: var(--psx-border);
+        background: var(--psx-bgcolor);
+        border-radius: 50% 50% 35% 35% / 25% 25% 65% 65%;
+        transform: rotate(var(--rotate-z));
+        z-index: 0;
+
+        &.left {
+          --rotate-z: 20deg;
+
+          left: -50px;
+        }
+
+        &.right {
+          --rotate-z: -20deg;
+
+          right: -50px;
+        }
+      }
+
+      & .controller-joystick {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        border: var(--psx-border);
+        border-width: 6px;
+        background: var(--psx-bgcolor);
+        position: absolute;
+        bottom: -30px;
+        z-index: 8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.left {
+          left: 25px;
+        }
+
+        &.right {
+          right: 25px;
+        }
+
+        & .controller-joystick-button {
+          width: 75%;
+          height: 75%;
+          border-radius: 50%;
+          background: #656569;
+        }
+      }
+    }
+  }
+}
+
+/* Animations */
+
+.mouth {
+  transform-origin: top;
+  animation: moveTongue 2s linear infinite alternate;
+}
+
+@keyframes moveTongue {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0.8);
+  }
+}
+
+.dancing {
+  animation: dance 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes dance {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-15deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(15deg);
+  }
+}
