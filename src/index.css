@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
 @font-face {
   font-family: "BioRhyme";
   src: url("/fonts/biorhyme.woff") format("woff");
@@ -31,6 +33,10 @@
 
 body {
   background: #44a;
+  background: linear-gradient(to top, #44a, #18182e);
+  height: 75vh;
+  margin: 0;
+  overflow: hidden;
 }
 
 .container {
@@ -50,9 +56,10 @@ body {
 
 .play-station-container {
   position: relative;
-  font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   font-size: 11px;
   letter-spacing: 0.5px;
+  z-index: -10;
 
   &::before {
     content: "";
@@ -311,7 +318,7 @@ body {
   display: flex;
   justify-content: center;
   transform: translateY(60px);
-  z-index: 10;
+  z-index: -5;
 
   & .play-station-controller-inner-container {
     display: flex;
@@ -623,6 +630,28 @@ body {
   }
 }
 
+/* Effects */
+
+.dancing {
+  filter: drop-shadow(0 0 20px #fff8);
+}
+
+.play-station-container,
+.play-station-controller-container {
+  transition: transform 1.5s ease;
+  transform: translateY(0);
+}
+
+.hide {
+  transform: translateY(600px);
+  opacity: 0;
+}
+
+.play-station-container:not(.hide),
+.play-station-controller-container:not(.hide) {
+  opacity: 1;
+}
+
 /* Animations */
 
 .mouth {
@@ -661,5 +690,98 @@ body {
 
   75% {
     transform: rotate(15deg);
+  }
+}
+
+/* 3D ROAD */
+
+.road-container {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 550px;
+  z-index: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .hide {
+    transform: translateY(1600px);
+  }
+
+  .road-container {
+    z-index: -35;
+  }
+}
+
+@media screen and (max-height: 900px) {
+  .road-container {
+    z-index: -35;
+  }
+}
+
+.road {
+  --lines-color: rgb(13, 204, 7);
+
+  background:
+    linear-gradient(-300deg, #f0f5, #0002, #0000),
+    linear-gradient(300deg, #00f5, #0002, #0000),
+    linear-gradient(to top, #000, #222);
+  transform: rotateX(72deg) scale(1.75);
+  border-top: 2px solid var(--lines-color);
+  overflow: hidden;
+
+  & .grid {
+    border: 1px solid var(--lines-color);
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+
+    &>div {
+      border: 1px solid var(--lines-color);
+      height: 150px;
+    }
+  }
+}
+
+.road-container.animated .grid {
+  animation: moveGrid 1s linear infinite;
+}
+
+@keyframes moveGrid {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-150px);
+  }
+}
+
+/* Letter */
+
+.data {
+  font-family: "EnterCommand";
+  background: #222;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  top: 25px;
+  left: calc(50% - 260px);
+  width: 500px;
+  padding: 20px 10px;
+  margin: auto;
+  z-index: -50;
+
+  & h1 {
+    font-size: 72px;
+    margin: 0;
+  }
+
+  & p {
+    font-size: 42px;
+    font-weight: bold;
+    color: #777;
+    margin: 0;
   }
 }
